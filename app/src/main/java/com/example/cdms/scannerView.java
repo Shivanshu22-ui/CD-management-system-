@@ -26,7 +26,7 @@ TextView tvScanContent, tvScanFormat;
         tvScanContent=findViewById(R.id.tvScanContent);
         tvScanFormat=findViewById(R.id.scanFormat);
 
-        scanBtn.setOnClickListener(this);
+//        scanBtn.setOnClickListener(this);
 
 //        scanBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
