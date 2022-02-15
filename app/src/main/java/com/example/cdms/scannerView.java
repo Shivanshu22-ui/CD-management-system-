@@ -29,16 +29,6 @@ TextView tvScanContent, tvScanFormat;
 
         scanBtn.setOnClickListener(this);
 
-//        scanBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//        IntentIntegrator i=new IntentIntegrator(this);
-//        i.setPrompt("Scan a barcode or QRcode");
-//        i.setOrientationLocked(false);
-//        i.initiateScan();
-//            }
-//        });
     }
 
     @Override
