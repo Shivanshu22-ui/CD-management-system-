@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -22,11 +23,11 @@ TextView tvScanContent, tvScanFormat;
         setContentView(R.layout.activity_scanner_view);
         IntentIntegrator i=new IntentIntegrator(this);
 
-        scanBtn=findViewById(R.id.scan);
+        scanBtn=findViewById(R.id.scanner);
         tvScanContent=findViewById(R.id.tvScanContent);
         tvScanFormat=findViewById(R.id.scanFormat);
 
-//        scanBtn.setOnClickListener(this);
+        scanBtn.setOnClickListener(this);
 
 //        scanBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
