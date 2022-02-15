@@ -23,4 +23,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Scan QR code" />
+
+    <Button
+        android:id="@+id/scan2"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/generate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="139dp"
+        android:text="Logut" />
 </RelativeLayout>
