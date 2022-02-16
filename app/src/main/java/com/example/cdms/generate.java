@@ -15,10 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.core.utilities.PushIdGenerator;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+
+import java.security.Key;
 
 public class generate extends AppCompatActivity {
 
@@ -27,7 +32,6 @@ public class generate extends AppCompatActivity {
     private EditText summary;
     private TextView txt;
     private Button btn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,17 +42,29 @@ public class generate extends AppCompatActivity {
         txt= findViewById(R.id.text1);
         btn=findViewById(R.id.btn);
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("cd");
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(name.toString().isEmpty()){
-                    Toast.makeText(generate.this,"kuchh daal to",Toast.LENGTH_SHORT).show();
+                if(name.getText().toString().trim().isEmpty()){
+                    Toast.makeText(generate.this,"Name must not be empty",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     String text=name.getText().toString();
                     try {
-                        Bitmap qrcode=createBitmap(text);
+                        String Name=name.getText().toString();
+                        String Summary=summary.getText().toString();
+
+                        cd cd =new cd(Name,Summary);
+                        String key=myRef.push().getKey();
+                        myRef.child(key).setValue(cd);
+
+                        Bitmap qrcode=createBitmap(key);
                         qrimg.setImageBitmap(qrcode);
+                        txt.setText("Here is the QR code");
+                        Toast.makeText(generate.this,"Data inserted",Toast.LENGTH_SHORT).show();
                     } catch (WriterException e) {
                         e.printStackTrace();
                     }
@@ -61,7 +77,7 @@ public class generate extends AppCompatActivity {
         BitMatrix result;
         try {
             result = new MultiFormatWriter().encode(str,
-                    BarcodeFormat.QR_CODE, 100, 100, null);
+                    BarcodeFormat.QR_CODE, 500, 500, null);
         } catch (IllegalArgumentException iae) {
             // Unsupported format
             return null;
@@ -78,7 +94,7 @@ public class generate extends AppCompatActivity {
             }
         }
         Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        bitmap.setPixels(pixels, 0, 100, 0, 0, w, h);
+        bitmap.setPixels(pixels, 0, 500, 0, 0, w, h);
         return bitmap;
     }
 }
