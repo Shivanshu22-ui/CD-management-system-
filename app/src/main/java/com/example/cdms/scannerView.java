@@ -28,7 +28,6 @@ TextView tvScanContent, tvScanFormat;
         tvScanFormat=findViewById(R.id.scanFormat);
 
         scanBtn.setOnClickListener(this);
-
     }
 
     @Override
