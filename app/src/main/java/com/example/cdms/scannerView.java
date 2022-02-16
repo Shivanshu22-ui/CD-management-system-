@@ -11,12 +11,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 public class scannerView extends AppCompatActivity  implements View.OnClickListener {
 Button scanBtn;
 TextView tvScanContent, tvScanFormat;
+DatabaseReference dbCD;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +30,8 @@ TextView tvScanContent, tvScanFormat;
         scanBtn=findViewById(R.id.scanner);
         tvScanContent=findViewById(R.id.tvScanContent);
         tvScanFormat=findViewById(R.id.scanFormat);
-
         scanBtn.setOnClickListener(this);
+
     }
 
     @Override
@@ -42,7 +46,7 @@ TextView tvScanContent, tvScanFormat;
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result=IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
-
+        Query q=FirebaseDatabase.getInstance().getReference("cd").orderByChild("id");
         if(result!=null){
             if(result.getContents()==null){
                 Toast.makeText(this, "Cacelled", Toast.LENGTH_SHORT).show();

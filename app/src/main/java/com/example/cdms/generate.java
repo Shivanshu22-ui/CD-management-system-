@@ -56,9 +56,10 @@ public class generate extends AppCompatActivity {
                     try {
                         String Name=name.getText().toString();
                         String Summary=summary.getText().toString();
-
-                        cd cd =new cd(Name,Summary);
                         String key=myRef.push().getKey();
+                        String id=key;
+                        cd cd =new cd(Name,Summary);
+
                         myRef.child(key).setValue(cd);
 
                         Bitmap qrcode=createBitmap(key);
