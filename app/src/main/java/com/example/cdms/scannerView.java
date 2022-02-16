@@ -46,11 +46,13 @@ DatabaseReference dbCD;
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result=IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
-        Query q=FirebaseDatabase.getInstance().getReference("cd").orderByChild("id");
+
         if(result!=null){
             if(result.getContents()==null){
                 Toast.makeText(this, "Cacelled", Toast.LENGTH_SHORT).show();
             }else{
+//                Query q=FirebaseDatabase.getInstance().getReference("cd").orderByChild("id").equalTo(result.getContents());
+
                 tvScanFormat.setText(result.getFormatName());
                 tvScanContent.setText(result.getContents());
             }

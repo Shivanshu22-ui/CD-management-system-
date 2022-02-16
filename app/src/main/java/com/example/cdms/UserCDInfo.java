@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 
 public class UserCDInfo extends AppCompatActivity {
-TextView bookname,bookSummary;
+public static TextView bookname,bookSummary;
     DatabaseReference dbCD;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
