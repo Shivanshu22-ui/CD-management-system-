@@ -31,5 +31,6 @@
         android:layout_below="@+id/generate"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="139dp"
-        android:text="Logut" />
+        android:text="Logout"
+        android:onClick="logout"/>
 </RelativeLayout>

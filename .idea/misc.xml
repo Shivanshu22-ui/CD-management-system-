@@ -5,8 +5,13 @@
       <map>
         <entry key="..\:/Users/USER/AndroidStudioProjects/CDMS/app/src/main/res/layout/activity_main.xml" value="0.11770833333333333" />
         <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_main.xml" value="0.259375" />
+
         <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_user_login.xml" value="0.22509057971014493" />
         <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_scanner_view.xml" value="0.2074074074074074" />
+
+        <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_user_login.xml" value="0.264" />
+        <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_user_signup.xml" value="0.25833333333333336" />
+
       </map>
     </option>
   </component>
