@@ -17,5 +17,8 @@ public static TextView bookname,bookSummary;
 
         bookname=findViewById(R.id.bookname);
         bookSummary=findViewById(R.id.bookSummary);
+        Bundle extras= getIntent().getExtras();
+        bookname.setText(extras.getString("name"));
+        bookSummary.setText(extras.getString("summary"));
     }
 }
