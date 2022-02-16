@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CDMS">
         <activity
+            android:name=".UserSignup"
+            android:exported="false" />
+        <activity
             android:name=".UserLogin"
             android:exported="true">
             <intent-filter>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -18,31 +19,39 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class UserLogin extends AppCompatActivity {
-
-    EditText mEmail, mPassword;
-    Button mLoginBtn;
-    TextView mSignUpBtn;
-    ProgressBar progressBar;
+public class UserSignup extends AppCompatActivity {
+    EditText mFullName,mEmail,mPassword,mConfirmPassword ;
+    Button mSignup;
+    TextView mLoginBtn;
     FirebaseAuth fAuth;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_login);
+        setContentView(R.layout.activity_user_signup);
 
-        mEmail = findViewById(R.id.loginEmail);
-        mPassword = findViewById(R.id.loginPassword);
-        mLoginBtn= findViewById(R.id.login);
-        mSignUpBtn = findViewById(R.id.signupBtn);
-        progressBar = findViewById(R.id.progressBar2);
+        mFullName = findViewById(R.id.PersonName);
+        mEmail = findViewById(R.id.email);
+        mPassword = findViewById(R.id.password);
+        mConfirmPassword = findViewById(R.id.confirmPassword);
+        mSignup = findViewById(R.id.signUp);
+        mLoginBtn = findViewById(R.id.loginBtn);
+        progressBar = findViewById(R.id.progressBar);
+
         fAuth = FirebaseAuth.getInstance();
 
-        mLoginBtn.setOnClickListener(new View.OnClickListener() {
+        if(fAuth.getCurrentUser()!=null){
+            startActivity(new Intent(getApplicationContext(),UserLogin.class));
+            finish();
+        }
+
+        mSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
+                String confirmPassword = mConfirmPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)){
                     mEmail.setError("Email is required");
@@ -54,34 +63,45 @@ public class UserLogin extends AppCompatActivity {
                     return;
                 }
 
+                if (TextUtils.isEmpty(confirmPassword)){
+                    mConfirmPassword.setError("Confirm password");
+                    return;
+                }
+
                 if(password.length()<6){
                     mPassword.setError("Password length should be more than 6 characters");
                     return;
                 }
 
+                if(!(password.toString().equals(confirmPassword.toString()))){
+                    mConfirmPassword.setError("Passwords do not match please re-enter");
+                    return;
+                }
+
                 progressBar.setVisibility(View.VISIBLE);
 
-                //Authenticate the user
+                // Register the user in firebase
 
-                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(UserLogin.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserSignup.this,"Signup Successful",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }
                         else{
-                            Toast.makeText(UserLogin.this,"Error!" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserSignup.this,"Error!" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
             }
         });
 
-        mSignUpBtn.setOnClickListener(new View.OnClickListener() {
+        mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),UserSignup.class));
+                startActivity(new Intent(getApplicationContext(),UserLogin.class));
             }
         });
     }
