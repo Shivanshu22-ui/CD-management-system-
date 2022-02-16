@@ -72,6 +72,7 @@ public class UserLogin extends AppCompatActivity {
                         }
                         else{
                             Toast.makeText(UserLogin.this,"Error!" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 });

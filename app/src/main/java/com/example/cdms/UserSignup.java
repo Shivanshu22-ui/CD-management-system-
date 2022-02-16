@@ -91,6 +91,7 @@ public class UserSignup extends AppCompatActivity {
                         }
                         else{
                             Toast.makeText(UserSignup.this,"Error!" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
