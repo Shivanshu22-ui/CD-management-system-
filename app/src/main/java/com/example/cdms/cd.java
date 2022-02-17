@@ -6,14 +6,6 @@ public class cd {
     private String id;
     private String user;
 
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
     public cd(String name, String summary, String id , String user) {
         this.name = name;
         this.summary = summary;
@@ -43,5 +35,11 @@ public class cd {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public String getUser() { return user; }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

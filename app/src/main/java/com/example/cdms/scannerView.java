@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +28,8 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class scannerView extends AppCompatActivity  implements View.OnClickListener {
 Button scanBtn;
-TextView tvScanContent, tvScanFormat;
+FirebaseAuth fAuth;
+TextView username;
 DatabaseReference dbCD;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,18 @@ DatabaseReference dbCD;
 
         scanBtn=findViewById(R.id.scanner);
         scanBtn.setOnClickListener(this);
+        username=findViewById(R.id.Username);
+
+        // databse updates
+        dbCD=FirebaseDatabase.getInstance().getReference("cd");
+
+        // Firebase users
+        fAuth = FirebaseAuth.getInstance();
+        FirebaseUser user=  fAuth.getCurrentUser();
+        String name = user.getEmail();
+        String[] splited = name.split("@");
+        name=splited[0];
+        username.setText("Welcome "+name);
     }
 
     @Override
@@ -56,6 +71,11 @@ DatabaseReference dbCD;
                 Toast.makeText(this, "Cacelled", Toast.LENGTH_SHORT).show();
             }else{
                 String code =result.getContents();
+                fAuth = FirebaseAuth.getInstance();
+                FirebaseUser userUpdate=  fAuth.getCurrentUser();
+                String borrower=userUpdate.getEmail();
+
+                dbCD.child(code).child("user").setValue(borrower);
                 Query q=FirebaseDatabase.getInstance().getReference("cd").orderByChild("id").equalTo(code);
                 q.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -77,13 +97,11 @@ DatabaseReference dbCD;
                         Toast.makeText(scannerView.this,"something wnt wrong",Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
-//                tvScanFormat.setText(result.getFormatName());
-//                tvScanContent.setText(result.getContents());
             }
         }else{
             super.onActivityResult(requestCode,resultCode,data);
         }
     }
+
+
 }
