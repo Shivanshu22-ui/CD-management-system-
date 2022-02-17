@@ -34,14 +34,18 @@ public class UserLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_login);
 
+        fAuth = FirebaseAuth.getInstance();
+        if(fAuth.getCurrentUser()!=null){
+            startActivity(new Intent(UserLogin.this,MainActivity.class));
+        }
+
+        setContentView(R.layout.activity_user_login);
         mEmail = findViewById(R.id.loginEmail);
         mPassword = findViewById(R.id.loginPassword);
         mLoginBtn= findViewById(R.id.login);
         mSignUpBtn = findViewById(R.id.signupBtn);
         progressBar = findViewById(R.id.progressBar2);
-        fAuth = FirebaseAuth.getInstance();
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,10 +111,12 @@ public class UserLogin extends AppCompatActivity {
                 else {
                     Toast.makeText(UserLogin.this,"Something went wrong",Toast.LENGTH_SHORT).show();
                 }
+                progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(UserLogin.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
