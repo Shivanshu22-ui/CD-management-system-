@@ -17,6 +17,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserLogin extends AppCompatActivity {
 
@@ -67,8 +72,7 @@ public class UserLogin extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(UserLogin.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            direct(task.getResult().getUser().getUid());
                         }
                         else{
                             Toast.makeText(UserLogin.this,"Error!" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
@@ -83,6 +87,30 @@ public class UserLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),UserSignup.class));
+            }
+        });
+    }
+
+    private void direct(String key) {
+        Query q= FirebaseDatabase.getInstance().getReference("users").orderByChild("key").equalTo(key);
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    if(snapshot.child(key).child("admin").getValue(boolean.class))
+                        startActivity(new Intent(UserLogin.this,generate.class));
+                    else
+                        startActivity(new Intent(UserLogin.this,MainActivity.class));
+
+                    Toast.makeText(UserLogin.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(UserLogin.this,"Something went wrong",Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(UserLogin.this,error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }

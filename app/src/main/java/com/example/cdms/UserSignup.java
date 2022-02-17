@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class UserSignup extends AppCompatActivity {
     EditText mFullName,mEmail,mPassword,mConfirmPassword ;
@@ -49,6 +51,7 @@ public class UserSignup extends AppCompatActivity {
         mSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name=mFullName.getText().toString().trim();
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
                 String confirmPassword = mConfirmPassword.getText().toString().trim();
@@ -86,6 +89,7 @@ public class UserSignup extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            insertdata(name,email,password,task.getResult().getUser().getUid());
                             Toast.makeText(UserSignup.this,"Signup Successful",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }
@@ -98,12 +102,17 @@ public class UserSignup extends AppCompatActivity {
 
             }
         });
-
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),UserLogin.class));
             }
         });
+    }
+
+    private void insertdata(String name, String email, String password, String key) {
+        User user=new User(name,email,password,key,false);
+        DatabaseReference ref= FirebaseDatabase.getInstance().getReference("users");
+        ref.child(key).setValue(user);
     }
 }
