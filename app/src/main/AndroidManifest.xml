@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CDMS">
         <activity
+            android:name=".listOfBorrowers"
+            android:exported="false" />
+        <activity
             android:name=".AdminUserVerification"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +26,6 @@
         <activity
             android:name=".AdminLogin"
             android:exported="false" />
-
         <activity
             android:name=".UserCDInfo"
             android:exported="false" />
@@ -32,9 +34,7 @@
             android:exported="false" />
         <activity
             android:name=".UserLogin"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".scannerView"
             android:exported="false" />
