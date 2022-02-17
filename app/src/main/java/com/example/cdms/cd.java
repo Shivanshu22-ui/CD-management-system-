@@ -4,11 +4,21 @@ public class cd {
     private String name;
     private String summary;
     private String id;
+    private String user;
 
-    public cd(String name, String summary,String id) {
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public cd(String name, String summary, String id , String user) {
         this.name = name;
         this.summary = summary;
         this.id=id;
+        this.user=user;
     }
 
     public String getId() {

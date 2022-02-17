@@ -16,16 +16,16 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/bookname"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.032" />
 
     <TextView
         android:id="@+id/bookname"
-        android:layout_width="235dp"
-        android:layout_height="31dp"
-        android:text="Book Name"
+        android:layout_width="242dp"
+        android:layout_height="46dp"
+        android:text="CD Name"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/bookSummary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,10 +35,10 @@
 
     <TextView
         android:id="@+id/bookSummary"
-        android:layout_width="248dp"
-        android:layout_height="36dp"
+        android:layout_width="246dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="112dp"
-        android:text="Book Summary"
+        android:text="CD Summary"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
         android:id="@+id/textView7"
         android:layout_width="156dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="72dp"
         android:text="Thank You"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -57,4 +57,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="286dp"
+        android:layout_height="47dp"
+        android:text="CD Name :"
+        android:textAlignment="textStart"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/bookname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.593" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="289dp"
+        android:layout_height="43dp"
+        android:text="CD Summary :"
+        android:textAlignment="textStart"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/bookSummary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.672"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookname"
+        app:layout_constraintVertical_bias="0.525" />
 </androidx.constraintlayout.widget.ConstraintLayout>

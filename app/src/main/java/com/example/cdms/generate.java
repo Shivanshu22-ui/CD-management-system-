@@ -58,7 +58,8 @@ public class generate extends AppCompatActivity {
                         String Summary=summary.getText().toString();
                         String key=myRef.push().getKey();
                         String id=key;
-                        cd cd =new cd(Name,Summary,id);
+                        String user=null;
+                        cd cd =new cd(Name,Summary,id,user);
 
                         myRef.child(key).setValue(cd);
 

@@ -35,8 +35,6 @@ DatabaseReference dbCD;
         IntentIntegrator i=new IntentIntegrator(this);
 
         scanBtn=findViewById(R.id.scanner);
-        tvScanContent=findViewById(R.id.tvScanContent);
-        tvScanFormat=findViewById(R.id.scanFormat);
         scanBtn.setOnClickListener(this);
     }
 
@@ -81,8 +79,8 @@ DatabaseReference dbCD;
                 });
 
 
-                tvScanFormat.setText(result.getFormatName());
-                tvScanContent.setText(result.getContents());
+//                tvScanFormat.setText(result.getFormatName());
+//                tvScanContent.setText(result.getContents());
             }
         }else{
             super.onActivityResult(requestCode,resultCode,data);
