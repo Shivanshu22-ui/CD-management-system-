@@ -2,9 +2,11 @@ package com.example.cdms;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +27,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class scannerView extends AppCompatActivity  implements View.OnClickListener {
 Button scanBtn;
@@ -78,9 +84,12 @@ DatabaseReference dbCD;
                 dbCD.child(code).child("user").setValue(borrower);
                 Query q=FirebaseDatabase.getInstance().getReference("cd").orderByChild("id").equalTo(code);
                 q.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
+                            updateuser(code);
+
                             String gotname=snapshot.child(code).child("name").getValue(String.class);
                             String gotsummary=snapshot.child(code).child("summary").getValue(String.class);
                             Intent intent= new Intent(scannerView.this,UserCDInfo.class);
@@ -101,6 +110,15 @@ DatabaseReference dbCD;
         }else{
             super.onActivityResult(requestCode,resultCode,data);
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void updateuser(String code) {
+        DateTimeFormatter dtf= DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss");
+        LocalDateTime now=LocalDateTime.now();
+
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference("cd/"+code+"/borrower");
+        ref.child(dtf.format(now)).setValue(fAuth.getCurrentUser().getUid());
     }
 
 
