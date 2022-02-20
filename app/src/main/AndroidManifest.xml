@@ -16,7 +16,8 @@
             android:exported="false" />
         <activity
             android:name=".listOfBorrowers"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".UserLogin"
             android:exported="true">

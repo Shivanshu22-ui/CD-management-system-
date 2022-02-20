@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +29,7 @@ DatabaseReference ref;
 ArrayList <String> list;
 ArrayAdapter <String> adapter;
 Borrower borrower;
+EditText inputSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ Borrower borrower;
         ref = database.getReference("cd");
         list = new ArrayList<>();
         adapter = new ArrayAdapter<String>(this,R.layout.activity_borrower_info, R.id.borrowerInfo,list);
+        inputSearch = (EditText) findViewById(R.id.inputSearch);
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -62,6 +67,27 @@ Borrower borrower;
                 Toast.makeText(listOfBorrowers.this, "Item clicked -"+adapter.getItem(i), Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(getApplicationContext(),BorrowerHistory.class));
+            }
+        });
+
+        inputSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                listOfBorrowers.this.adapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
             }
         });
     }
