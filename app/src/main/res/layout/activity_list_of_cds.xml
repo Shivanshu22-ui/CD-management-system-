@@ -8,7 +8,7 @@
     android:focusable="true"
     android:background="@color/white"
     android:focusableInTouchMode="true"
-    tools:context=".listOfBorrowers">
+    tools:context=".listOfcds">
 
     <EditText
         android:id="@+id/inputSearch"

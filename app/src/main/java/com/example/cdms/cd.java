@@ -6,6 +6,9 @@ public class cd {
     private String id;
     private String user;
 
+    public cd(){
+
+    }
     public cd(String name, String summary, String id , String user) {
         this.name = name;
         this.summary = summary;

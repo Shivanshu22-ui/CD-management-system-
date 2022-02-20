@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.zxing.integration.android.IntentIntegrator;
 
 public class MainActivity extends AppCompatActivity {
     private Button genbtn;
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         listbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(MainActivity.this,listOfBorrowers.class);
+                Intent intent= new Intent(MainActivity.this, listOfcds.class);
                 startActivity(intent);
             }
         });
