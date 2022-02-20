@@ -3,9 +3,13 @@ package com.example.cdms;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,30 +21,47 @@ import java.util.ArrayList;
 
 public class listOfBorrowers extends AppCompatActivity {
 ListView listView;
+FirebaseDatabase database;
+DatabaseReference ref;
+ArrayList <String> list;
+ArrayAdapter <String> adapter;
+Borrower borrower;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_borrowers);
+
+        borrower = new Borrower();
         listView=findViewById(R.id.listview);
-        ArrayList<String> list=new ArrayList<>();
-        ArrayAdapter adapter=new ArrayAdapter(this,R.layout.list_items , list);
-        listView.setAdapter(adapter);
-        DatabaseReference db= FirebaseDatabase.getInstance().getReference("cd");
-        db.addValueEventListener(new ValueEventListener() {
+        database = FirebaseDatabase.getInstance();
+        ref = database.getReference("cd");
+        list = new ArrayList<>();
+        adapter = new ArrayAdapter<String>(this,R.layout.activity_borrower_info, R.id.borrowerInfo,list);
+
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
-                for(DataSnapshot snap: snapshot.getChildren()){
-                    for(DataSnapshot snp:snap.getChildren()) {
-                        list.add(snp.getValue().toString());
-                    }
+                for(DataSnapshot ds : snapshot.getChildren()){
+
+                    borrower = ds.getValue(Borrower.class);
+                    list.add(borrower.getName().toString() + "  -  " +borrower.getSummary().toString());
                 }
-                adapter.notifyDataSetChanged();
+                listView.setAdapter(adapter);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(listOfBorrowers.this, "Item clicked -"+adapter.getItem(i), Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(getApplicationContext(),BorrowerHistory.class));
             }
         });
     }
