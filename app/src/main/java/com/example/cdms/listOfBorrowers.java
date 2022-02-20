@@ -41,25 +41,26 @@ EditText inputSearch;
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("cd");
         list = new ArrayList<>();
-        adapter = new ArrayAdapter<String>(this,R.layout.activity_borrower_info, R.id.borrowerInfo,list);
+        adapter = new ArrayAdapter<String>(this,R.layout.activity_cd_list_layout,list);
+        listView.setAdapter(adapter);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
 
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()){
-
-                    borrower = ds.getValue(Borrower.class);
-                    list.add(borrower.getName().toString() + "  -  " +borrower.getSummary().toString());
-                }
-                listView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        ref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot ds : snapshot.getChildren()){
+//
+//                    borrower = ds.getValue(Borrower.class);
+//                    list.add(borrower.getName().toString() + "  -  " +borrower.getSummary().toString());
+//                }
+//                listView.setAdapter(adapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
