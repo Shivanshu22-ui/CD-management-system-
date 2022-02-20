@@ -34,6 +34,7 @@
         android:layout_marginTop="20dp"
         android:background="#D9DADF"
         android:hint="Enter name of CD"
+        android:textColorHint="#474545"
         android:textAlignment="center"
         android:textSize="20sp" />
 
@@ -42,6 +43,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_below="@+id/name"
+        android:textColorHint="#474545"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="#D9DADF"
@@ -54,6 +56,7 @@
         android:layout_width="289dp"
         android:layout_height="65dp"
         android:layout_below="@+id/summary"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         android:backgroundTint="#27399E"
