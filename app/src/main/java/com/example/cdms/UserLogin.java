@@ -102,9 +102,9 @@ public class UserLogin extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     if(snapshot.child(key).child("admin").getValue(boolean.class))
-                        startActivity(new Intent(UserLogin.this,generate.class));
-                    else
                         startActivity(new Intent(UserLogin.this,MainActivity.class));
+                    else
+                        startActivity(new Intent(UserLogin.this,scannerView.class));
 
                     Toast.makeText(UserLogin.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
                 }
