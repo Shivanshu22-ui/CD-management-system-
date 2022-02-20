@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CDMS">
         <activity
-            android:name=".cdHistory"
+            android:name=".BorrowerHistory"
             android:exported="false" />
         <activity
-            android:name=".listOfcds"
+            android:name=".listOfBorrowers"
             android:exported="false" />
         <activity
             android:name=".UserLogin"

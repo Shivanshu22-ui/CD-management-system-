@@ -19,33 +19,33 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class listOfcds extends AppCompatActivity {
+public class listOfBorrowers extends AppCompatActivity {
 ListView listView;
 FirebaseDatabase database;
 DatabaseReference ref;
 ArrayList <String> list;
 ArrayAdapter <String> adapter;
-cd cd;
+Borrower borrower;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_of_cds);
+        setContentView(R.layout.activity_list_of_borrowers);
 
-        cd = new cd();
+        borrower = new Borrower();
         listView=findViewById(R.id.listview);
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("cd");
         list = new ArrayList<>();
-        adapter = new ArrayAdapter<String>(this,R.layout.activity_cd_info, R.id.borrowerInfo,list);
+        adapter = new ArrayAdapter<String>(this,R.layout.activity_borrower_info, R.id.borrowerInfo,list);
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()){
 
-                    cd = ds.getValue(cd.class);
-                    list.add(cd.getName().toString() + "  -  " +cd.getSummary().toString());
+                    borrower = ds.getValue(Borrower.class);
+                    list.add(borrower.getName().toString() + "  -  " +borrower.getSummary().toString());
                 }
                 listView.setAdapter(adapter);
             }
@@ -59,9 +59,9 @@ cd cd;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(listOfcds.this, "Item clicked -"+adapter.getItem(i), Toast.LENGTH_SHORT).show();
+                Toast.makeText(listOfBorrowers.this, "Item clicked -"+adapter.getItem(i), Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(getApplicationContext(), cdHistory.class));
+                startActivity(new Intent(getApplicationContext(),BorrowerHistory.class));
             }
         });
     }
