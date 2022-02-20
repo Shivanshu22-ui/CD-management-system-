@@ -22,52 +22,52 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class listOfBorrowers extends AppCompatActivity {
+public class listOfcds extends AppCompatActivity {
 ListView listView;
 FirebaseDatabase database;
 DatabaseReference ref;
 ArrayList <String> list;
 ArrayAdapter <String> adapter;
-Borrower borrower;
+cd cd;
 EditText inputSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_of_borrowers);
+        setContentView(R.layout.activity_list_of_cds);
 
-        borrower = new Borrower();
+        cd = new cd();
         listView=findViewById(R.id.listview);
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("cd");
         list = new ArrayList<>();
+
         adapter = new ArrayAdapter<String>(this,R.layout.activity_cd_list_layout,list);
         listView.setAdapter(adapter);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()){
 
-//        ref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot ds : snapshot.getChildren()){
-//
-//                    borrower = ds.getValue(Borrower.class);
-//                    list.add(borrower.getName().toString() + "  -  " +borrower.getSummary().toString());
-//                }
-//                listView.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+                    cd = ds.getValue(cd.class);
+                    list.add(cd.getName().toString() + "  -  " +cd.getSummary().toString());
+                }
+                listView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(listOfBorrowers.this, "Item clicked -"+adapter.getItem(i), Toast.LENGTH_SHORT).show();
+                Toast.makeText(listOfcds.this, "Item clicked -"+adapter.getItem(i), Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(getApplicationContext(),BorrowerHistory.class));
+                startActivity(new Intent(getApplicationContext(), cdHistory.class));
             }
         });
 
@@ -76,7 +76,7 @@ EditText inputSearch;
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-                listOfBorrowers.this.adapter.getFilter().filter(cs);
+                listOfcds.this.adapter.getFilter().filter(cs);
             }
 
             @Override
