@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".listOfBorrowers">
+    tools:context=".listOfcds">
 
     <EditText
         android:id="@+id/inputSearch"
