@@ -4,32 +4,31 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/USER/AndroidStudioProjects/CDMS/app/src/main/res/layout/activity_main.xml" value="0.11770833333333333" />
+        <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_admin_login.xml" value="0.264" />
+        <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_admin_user_verification.xml" value="0.264" />
+        <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_borrower_history.xml" value="0.1203125" />
+        <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_borrower_info.xml" value="0.1" />
+        <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_list_of_borrowers.xml" value="0.2346014492753623" />
         <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_main.xml" value="0.259375" />
-        <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_user_login.xml" value="0.264" />
-        <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_user_signup.xml" value="0.25833333333333336" />
-        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_admin_login.xml" value="0.24728260869565216" />
-        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_admin_user_verification.xml" value="0.24728260869565216" />
-        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_generate.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_scanner_view.xml" value="0.2346014492753623" />
+        <entry key="..\:/Users/vidus/OneDrive/Desktop/DevLok/CD-management-system-/app/src/main/res/layout/activity_user_login.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_borrower_history.xml" value="0.20969202898550723" />
+        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_cd_history.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_list_of_cds.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_main.xml" value="0.20969202898550723" />
-        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_scanner_view.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_user_cdinfo.xml" value="0.24728260869565216" />
-        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_user_login.xml" value="0.24728260869565216" />
-        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_user_signup.xml" value="0.24728260869565216" />
-        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/list_items.xml" value="0.24728260869565216" />
-        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_borrower_history.xml" value="0.22083333333333333" />
-        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_borrower_info.xml" value="0.22083333333333333" />
-        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_generate.xml" value="0.23645833333333333" />
-        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_list_of_borrowers.xml" value="0.23645833333333333" />
-        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_main.xml" value="0.23645833333333333" />
-        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_scanner_view.xml" value="0.2" />
-        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_user_cdinfo.xml" value="0.22083333333333333" />
-        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_user_login.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/activity_user_signup.xml" value="0.14114583333333333" />
+        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/cd_borrower_info.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/cd_history_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/historylist_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/yashb/Desktop/projects/CD-management-system-/app/src/main/res/layout/list_items.xml" value="0.36666666666666664" />
+        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_scanner_view.xml" value="0.2074074074074074" />
+        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_user_cdinfo.xml" value="0.23645833333333333" />
+        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_user_login.xml" value="0.23645833333333333" />
         <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/activity_user_signup.xml" value="0.23645833333333333" />
-        <entry key="..\:/Volume D/React js/CD-management-system-/app/src/main/res/layout/list_items.xml" value="0.23645833333333333" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -28,6 +28,7 @@ FirebaseDatabase database;
 DatabaseReference ref;
 ArrayList <String> list;
 ArrayAdapter <String> adapter;
+ArrayList<String> idlist;
 cd cd;
 EditText inputSearch;
 
@@ -41,6 +42,7 @@ EditText inputSearch;
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("cd");
         list = new ArrayList<>();
+        idlist = new ArrayList<>();
         adapter = new ArrayAdapter<String>(this,R.layout.activity_cd_info, R.id.borrowerInfo,list);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
 
@@ -51,6 +53,7 @@ EditText inputSearch;
 
                     cd = ds.getValue(cd.class);
                     list.add(cd.getName().toString() + "  -  " +cd.getSummary().toString());
+                    idlist.add(cd.getId());
                 }
                 listView.setAdapter(adapter);
             }
@@ -65,8 +68,9 @@ EditText inputSearch;
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(listOfcds.this, "Item clicked -"+adapter.getItem(i), Toast.LENGTH_SHORT).show();
-
-                startActivity(new Intent(getApplicationContext(), cdHistory.class));
+                Intent intent= new Intent(listOfcds.this,cdHistory.class);
+                intent.putExtra("id",idlist.get(i));
+                startActivity(intent);
             }
         });
 
