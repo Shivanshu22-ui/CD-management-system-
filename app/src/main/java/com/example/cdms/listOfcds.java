@@ -83,7 +83,7 @@ EditText inputSearch;
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-//                listOfcds.this.adapter.getFilter().filter(cs);
+                // listOfcds.this.adapter.getFilter().filter(cs);
             }
 
             @Override

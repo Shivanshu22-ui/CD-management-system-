@@ -62,6 +62,4 @@
         android:backgroundTint="#27399E"
         android:text="GENERATE QR CODE" />
 
-
-
 </RelativeLayout>

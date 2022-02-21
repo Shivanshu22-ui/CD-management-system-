@@ -95,6 +95,7 @@
         android:backgroundTint="#27399E"
         android:hapticFeedbackEnabled="false"
         android:text="Login"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPassword" />

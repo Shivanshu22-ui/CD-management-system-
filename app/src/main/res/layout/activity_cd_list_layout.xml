@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="4dp"
     android:orientation="vertical">
 
 
@@ -11,12 +12,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/cdSummary"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:paddingBottom="6dp"
         android:text="TextView" />
+
+
 </LinearLayout>
