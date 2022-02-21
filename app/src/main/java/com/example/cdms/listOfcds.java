@@ -21,14 +21,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class listOfcds extends AppCompatActivity {
 ListView listView;
 FirebaseDatabase database;
 DatabaseReference ref;
-ArrayList <String> list;
-ArrayAdapter <String> adapter;
+List<cd> cdList = new ArrayList<>();
+cdLayout CdLayout;
+//ArrayAdapter<String> adapter;
 cd cd;
+//ArrayList<String> list;
 EditText inputSearch;
 
     @Override
@@ -40,20 +43,24 @@ EditText inputSearch;
         listView=findViewById(R.id.listview);
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("cd");
-        list = new ArrayList<>();
+//        list = new ArrayList<>();
 
-        adapter = new ArrayAdapter<String>(this,R.layout.activity_cd_list_layout,list);
-        listView.setAdapter(adapter);
+//        adapter = new ArrayAdapter<String>(this,R.layout.activity_cd_info,R.id.borrowerInfo,list);
+//        listView.setAdapter(adapter);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()){
 
+                ArrayList<cd> cdList= new ArrayList<>();
+                for(DataSnapshot ds : snapshot.getChildren()){
                     cd = ds.getValue(cd.class);
-                    list.add(cd.getName().toString() + "  -  " +cd.getSummary().toString());
+                    cdList.add(cd);
+
+//                    list.add(cd.getName().toString() + "  -  " +cd.getSummary().toString());
                 }
-                listView.setAdapter(adapter);
+                CdLayout = new cdLayout(getApplicationContext(),cdList);
+                listView.setAdapter(CdLayout);
             }
 
             @Override
@@ -65,7 +72,7 @@ EditText inputSearch;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(listOfcds.this, "Item clicked -"+adapter.getItem(i), Toast.LENGTH_SHORT).show();
+                Toast.makeText(listOfcds.this, "Item clicked -"+cdList.get(i).getName(), Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(getApplicationContext(), cdHistory.class));
             }
@@ -76,7 +83,7 @@ EditText inputSearch;
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-                listOfcds.this.adapter.getFilter().filter(cs);
+//                listOfcds.this.adapter.getFilter().filter(cs);
             }
 
             @Override
