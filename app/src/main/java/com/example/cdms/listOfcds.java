@@ -27,9 +27,14 @@ public class listOfcds extends AppCompatActivity {
 ListView listView;
 FirebaseDatabase database;
 DatabaseReference ref;
+ArrayList <String> list;
+ArrayAdapter <String> adapter;
+ArrayList<String> idlist;
+
 List<cd> cdList = new ArrayList<>();
 cdLayout CdLayout;
 //ArrayAdapter<String> adapter;
+
 cd cd;
 //ArrayList<String> list;
 EditText inputSearch;
@@ -43,7 +48,10 @@ EditText inputSearch;
         listView=findViewById(R.id.listview);
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("cd");
-//        list = new ArrayList<>();
+        list = new ArrayList<>();
+        idlist = new ArrayList<>();
+        adapter = new ArrayAdapter<String>(this,R.layout.activity_cd_info, R.id.borrowerInfo,list);
+        inputSearch = (EditText) findViewById(R.id.inputSearch);
 
 //        adapter = new ArrayAdapter<String>(this,R.layout.activity_cd_info,R.id.borrowerInfo,list);
 //        listView.setAdapter(adapter);
@@ -55,9 +63,13 @@ EditText inputSearch;
                 ArrayList<cd> cdList= new ArrayList<>();
                 for(DataSnapshot ds : snapshot.getChildren()){
                     cd = ds.getValue(cd.class);
+
+                    list.add(cd.getName().toString() + "  -  " +cd.getSummary().toString());
+                    idlist.add(cd.getId());
                     cdList.add(cd);
 
 //                    list.add(cd.getName().toString() + "  -  " +cd.getSummary().toString());
+
                 }
                 CdLayout = new cdLayout(getApplicationContext(),cdList);
                 listView.setAdapter(CdLayout);
@@ -72,9 +84,10 @@ EditText inputSearch;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(listOfcds.this, "Item clicked -"+cdList.get(i).getName(), Toast.LENGTH_SHORT).show();
-
-                startActivity(new Intent(getApplicationContext(), cdHistory.class));
+                Toast.makeText(listOfcds.this, "Item clicked -"+adapter.getItem(i), Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(listOfcds.this,cdHistory.class);
+                intent.putExtra("id",idlist.get(i));
+                startActivity(intent);
             }
         });
 
