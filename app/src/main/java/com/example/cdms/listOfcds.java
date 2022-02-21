@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class listOfcds extends AppCompatActivity {
 ListView listView;
@@ -29,7 +30,13 @@ DatabaseReference ref;
 ArrayList <String> list;
 ArrayAdapter <String> adapter;
 ArrayList<String> idlist;
+
+List<cd> cdList = new ArrayList<>();
+cdLayout CdLayout;
+//ArrayAdapter<String> adapter;
+
 cd cd;
+//ArrayList<String> list;
 EditText inputSearch;
 
     @Override
@@ -46,16 +53,26 @@ EditText inputSearch;
         adapter = new ArrayAdapter<String>(this,R.layout.activity_cd_info, R.id.borrowerInfo,list);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
 
+//        adapter = new ArrayAdapter<String>(this,R.layout.activity_cd_info,R.id.borrowerInfo,list);
+//        listView.setAdapter(adapter);
+        inputSearch = (EditText) findViewById(R.id.inputSearch);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()){
 
+                ArrayList<cd> cdList= new ArrayList<>();
+                for(DataSnapshot ds : snapshot.getChildren()){
                     cd = ds.getValue(cd.class);
+
                     list.add(cd.getName().toString() + "  -  " +cd.getSummary().toString());
                     idlist.add(cd.getId());
+                    cdList.add(cd);
+
+//                    list.add(cd.getName().toString() + "  -  " +cd.getSummary().toString());
+
                 }
-                listView.setAdapter(adapter);
+                CdLayout = new cdLayout(getApplicationContext(),cdList);
+                listView.setAdapter(CdLayout);
             }
 
             @Override
@@ -79,7 +96,7 @@ EditText inputSearch;
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-                listOfcds.this.adapter.getFilter().filter(cs);
+//                listOfcds.this.adapter.getFilter().filter(cs);
             }
 
             @Override
