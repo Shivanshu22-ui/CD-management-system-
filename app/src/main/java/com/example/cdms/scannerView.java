@@ -33,7 +33,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class scannerView extends AppCompatActivity  implements View.OnClickListener {
-Button scanBtn;
+Button scanBtn, userLogout;
 FirebaseAuth fAuth;
 TextView username;
 DatabaseReference dbCD;
@@ -46,6 +46,8 @@ DatabaseReference dbCD;
         scanBtn=findViewById(R.id.scanner);
         scanBtn.setOnClickListener(this);
         username=findViewById(R.id.Username);
+        userLogout=findViewById(R.id.userLogout);
+
 
         // databse updates
         dbCD=FirebaseDatabase.getInstance().getReference("cd");
@@ -121,5 +123,9 @@ DatabaseReference dbCD;
         ref.child(dtf.format(now)).setValue(fAuth.getCurrentUser().getUid());
     }
 
-
+    public void logout(View view){
+        FirebaseAuth.getInstance().signOut(); // signout user
+        startActivity(new Intent(getApplicationContext(),UserLogin.class));
+        finishAffinity();
+    }
 }
