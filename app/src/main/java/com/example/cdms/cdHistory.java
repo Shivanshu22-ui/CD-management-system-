@@ -37,10 +37,11 @@ public class cdHistory extends AppCompatActivity {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                cdHistoryAdapter adapter =new cdHistoryAdapter(getApplicationContext(),userlist,timelist);
                 for(DataSnapshot snp :snapshot.getChildren()){
                     finduser(snp.getValue(String.class),snp.getKey());
                 }
-                cdHistoryAdapter adapter =new cdHistoryAdapter(getApplicationContext(),userlist,timelist);
+
                 adapter.notifyDataSetChanged();
                 listview.setAdapter(adapter);
             }

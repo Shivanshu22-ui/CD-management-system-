@@ -65,7 +65,8 @@ DatabaseReference dbCD;
     public void onClick(View view) {
         IntentIntegrator i=new IntentIntegrator(this);
         i.setPrompt("Scan a barcode or QRcode");
-        i.setOrientationLocked(false);
+        i.setOrientationLocked(true);
+        i.setCaptureActivity(CaptureActivityPortrait.class);
         i.initiateScan();
     }
 
