@@ -66,7 +66,7 @@ EditText inputSearch;
                 for(DataSnapshot ds : snapshot.getChildren()){
                     cd = ds.getValue(cd.class);
 
-                    list.add(cd.getName().toString() + "  -  " +cd.getSummary().toString());
+                    list.add(cd.getName().toString() + "  -  " +cd.getBranchCode().toString());
                     idlist.add(cd.getId());
                     cdList.add(cd);
 
