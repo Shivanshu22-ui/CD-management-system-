@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ import java.util.Date;
 
 public class scannerView extends AppCompatActivity  implements View.OnClickListener {
 Button scanBtn, userLogout;
+EditText remark;
 FirebaseAuth fAuth;
 TextView username;
 DatabaseReference dbCD;
@@ -47,6 +49,7 @@ DatabaseReference dbCD;
         scanBtn.setOnClickListener(this);
         username=findViewById(R.id.Username);
         userLogout=findViewById(R.id.userLogout);
+        remark=findViewById(R.id.remark);
 
 
         // databse updates
@@ -83,7 +86,7 @@ DatabaseReference dbCD;
                 fAuth = FirebaseAuth.getInstance();
                 FirebaseUser userUpdate=  fAuth.getCurrentUser();
                 String borrower=userUpdate.getEmail();
-
+//                DatabaseReference ref
                 dbCD.child(code).child("user").setValue(borrower);
                 Query q=FirebaseDatabase.getInstance().getReference("cd").orderByChild("id").equalTo(code);
                 q.addListenerForSingleValueEvent(new ValueEventListener() {

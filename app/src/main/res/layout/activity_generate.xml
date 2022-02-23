@@ -34,8 +34,8 @@
         android:layout_marginTop="20dp"
         android:background="#D9DADF"
         android:hint="Enter name of CD"
-        android:textColorHint="#474545"
         android:textAlignment="center"
+        android:textColorHint="#474545"
         android:textSize="20sp" />
 
     <EditText
