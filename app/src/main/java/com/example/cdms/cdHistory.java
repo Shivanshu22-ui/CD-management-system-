@@ -16,33 +16,41 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class cdHistory extends AppCompatActivity {
     private String id;
-    private ArrayList<User> userlist;
     private ListView listview;
-    private ArrayList<String> timelist;
+    private cdHistoryAdapter adapter;
+    private ArrayList<UserTime> userlist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cd_history);
 
         id=getIntent().getExtras().getString("id");
-        userlist=new ArrayList<>();
-        timelist=new ArrayList<>();
         listview= findViewById(R.id.listview2);
+        userlist=new ArrayList<>();
 
-        DatabaseReference ref= FirebaseDatabase.getInstance().getReference("cd/"+id+"/borrower");
+        DatabaseReference ref= FirebaseDatabase.getInstance().getReference("cd/"+ id+"/borrower");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                cdHistoryAdapter adapter =new cdHistoryAdapter(getApplicationContext(),userlist,timelist);
-                for(DataSnapshot snp :snapshot.getChildren()){
-                    finduser(snp.getValue(String.class),snp.getKey());
-                }
+                for(DataSnapshot snp:snapshot.getChildren()){
+                    String name=snp.child("name").getValue(String.class);
+                    String key=snp.child("id").getValue(String.class);
+                    String time=snp.child("time").getValue(String.class);
+                    String email=snp.child("email").getValue(String.class);
 
-                adapter.notifyDataSetChanged();
+                    UserTime ut= new UserTime(name,email,time,key);
+                    userlist.add(ut);
+                }
+                ArrayList<UserTime> revut=new ArrayList<>();
+                for(int i=userlist.size()-1;i>=0;i--){
+                    revut.add(userlist.get(i));
+                }
+                adapter=new cdHistoryAdapter(getApplicationContext(),revut);
                 listview.setAdapter(adapter);
             }
             @Override
@@ -50,23 +58,7 @@ public class cdHistory extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
-    private void finduser(String key, String dat) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/" + key);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                userlist.add(user);
-                timelist.add(dat);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 }

@@ -31,6 +31,7 @@ import com.google.zxing.integration.android.IntentResult;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class scannerView extends AppCompatActivity  implements View.OnClickListener {
 Button scanBtn, userLogout;
@@ -77,7 +78,7 @@ DatabaseReference dbCD;
 
         if(result!=null){
             if(result.getContents()==null){
-                Toast.makeText(this, "Cacelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
             }else{
                 String code =result.getContents();
                 fAuth = FirebaseAuth.getInstance();
@@ -98,6 +99,8 @@ DatabaseReference dbCD;
                             Intent intent= new Intent(scannerView.this,UserCDInfo.class);
                             intent.putExtra("name",gotname);
                             intent.putExtra("summary",gotsummary);
+                            Log.d("luls",gotname);
+                            Log.d("luls",gotsummary);
                             startActivity(intent);
                         }
                         else{
@@ -121,7 +124,22 @@ DatabaseReference dbCD;
         LocalDateTime now=LocalDateTime.now();
 
         DatabaseReference ref=FirebaseDatabase.getInstance().getReference("cd/"+code+"/borrower");
-        ref.child(dtf.format(now)).setValue(fAuth.getCurrentUser().getUid());
+        String userKey=fAuth.getCurrentUser().getUid();
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("users/"+userKey);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user=snapshot.getValue(User.class);
+                UserTime ut=new UserTime(user.getName(),user.getEmail(),dtf.format(now),user.getKey());
+                ref.child(ut.getTime()).setValue(ut);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     public void logout(View view){
