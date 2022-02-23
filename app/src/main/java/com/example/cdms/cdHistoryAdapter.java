@@ -1,6 +1,7 @@
 package com.example.cdms;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,13 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class cdHistoryAdapter extends ArrayAdapter<User> {
-    private ArrayList<User> userArrayList;
-    private ArrayList<String> timelist;
+public class cdHistoryAdapter extends ArrayAdapter<UserTime> {
+    private ArrayList<UserTime> userArrayList;
     private Context context;
-    public cdHistoryAdapter(@NonNull Context context, ArrayList<User> userArrayList,ArrayList<String> time) {
-        super(context, R.layout.list_items,userArrayList);
+    public cdHistoryAdapter(@NonNull Context context, ArrayList<UserTime> userArrayList) {
+        super(context,0,userArrayList);
+
         this.userArrayList=userArrayList;
-        this.timelist=time;
         this.context=context;
     }
 
@@ -33,13 +33,13 @@ public class cdHistoryAdapter extends ArrayAdapter<User> {
         TextView key=convertView.findViewById(R.id.li_key);
         TextView email=convertView.findViewById(R.id.li_email);
         TextView time=convertView.findViewById(R.id.li_time);
+        String timedate=userArrayList.get(position).getTime();
 
         name.setText(userArrayList.get(position).getName());
-        key.setText(userArrayList.get(position).getKey());
+        key.setText(Html.fromHtml("<b>Key : </b>"+userArrayList.get(position).getId()));
         email.setText(userArrayList.get(position).getEmail());
-        time.setText(timelist.get(position));
+        time.setText(Html.fromHtml("<b>Scanned on: </b>"+timedate.substring(0,10)+"&nbsp;&nbsp;&nbsp;"+timedate.substring(12,19)));
 
-        notifyDataSetChanged();
         return convertView;
     }
 }

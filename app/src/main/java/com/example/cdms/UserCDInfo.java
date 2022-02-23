@@ -3,6 +3,7 @@ package com.example.cdms;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -17,8 +18,9 @@ public static TextView bookname,bookSummary;
 
         bookname=findViewById(R.id.bookname);
         bookSummary=findViewById(R.id.bookSummary);
-        Bundle extras= getIntent().getExtras();
-        bookname.setText(extras.getString("name"));
-        bookSummary.setText(extras.getString("summary"));
+        String name=getIntent().getExtras().getString("summary");
+        String summary=getIntent().getExtras().getString("name");
+        bookname.setText(name);
+        bookSummary.setText(summary);
     }
 }
