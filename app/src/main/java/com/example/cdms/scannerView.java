@@ -95,12 +95,12 @@ DatabaseReference dbCD;
                             updateuser(code);
 
                             String gotname=snapshot.child(code).child("name").getValue(String.class);
-                            String gotsummary=snapshot.child(code).child("summary").getValue(String.class);
+                            String gotBranchCode=snapshot.child(code).child("BranchCode").getValue(String.class);
                             Intent intent= new Intent(scannerView.this,UserCDInfo.class);
                             intent.putExtra("name",gotname);
-                            intent.putExtra("summary",gotsummary);
+                            intent.putExtra("branchcode",gotBranchCode);
                             Log.d("luls",gotname);
-                            Log.d("luls",gotsummary);
+                            Log.d("luls",gotBranchCode);
                             startActivity(intent);
                         }
                         else{

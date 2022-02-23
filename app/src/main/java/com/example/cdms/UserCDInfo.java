@@ -18,7 +18,7 @@ public static TextView bookname,bookSummary;
 
         bookname=findViewById(R.id.bookname);
         bookSummary=findViewById(R.id.bookSummary);
-        String name=getIntent().getExtras().getString("summary");
+        String name=getIntent().getExtras().getString("branchcode");
         String summary=getIntent().getExtras().getString("name");
         bookname.setText(name);
         bookSummary.setText(summary);

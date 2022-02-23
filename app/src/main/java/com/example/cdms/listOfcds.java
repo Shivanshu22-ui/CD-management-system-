@@ -98,7 +98,7 @@ EditText inputSearch;
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for(DataSnapshot snp:snapshot.getChildren()){
                             String name=snp.child("name").getValue(String.class);
-                            String key=snp.child("name").getValue(String.class);
+                            String key=snp.child("id").getValue(String.class);
                             String time=snp.child("time").getValue(String.class);
                             String email=snp.child("email").getValue(String.class);
 
