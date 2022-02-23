@@ -1,6 +1,7 @@
 package com.example.cdms;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +36,9 @@ public class cdHistoryAdapter extends ArrayAdapter<UserTime> {
         String timedate=userArrayList.get(position).getTime();
 
         name.setText(userArrayList.get(position).getName());
-        key.setText(userArrayList.get(position).getId());
+        key.setText(Html.fromHtml("<b>Key : </b>"+userArrayList.get(position).getId()));
         email.setText(userArrayList.get(position).getEmail());
-        time.setText(userArrayList.get(position).getTime());
+        time.setText(Html.fromHtml("<b>Scanned on: </b>"+timedate.substring(0,10)+"&nbsp;&nbsp;&nbsp;"+timedate.substring(12,19)));
 
         return convertView;
     }
