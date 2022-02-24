@@ -133,7 +133,7 @@ DatabaseReference dbCD;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user=snapshot.getValue(User.class);
-                UserTime ut=new UserTime(user.getName(),user.getEmail(),dtf.format(now),user.getKey());
+                UserTime ut=new UserTime(user.getName(),user.getEmail(),dtf.format(now),user.getKey(),remark.getText().toString());
                 ref.child(ut.getTime()).setValue(ut);
             }
 

@@ -101,8 +101,8 @@ EditText inputSearch;
                             String key=snp.child("name").getValue(String.class);
                             String time=snp.child("time").getValue(String.class);
                             String email=snp.child("email").getValue(String.class);
-
-                            UserTime ut= new UserTime(name,email,time,key);
+                            String remark= snp.child("remark").getValue(String.class);
+                            UserTime ut= new UserTime(name,email,time,key,remark);
                             userlist.add(ut);
                         }
                     }

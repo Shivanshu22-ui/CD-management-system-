@@ -42,8 +42,9 @@ public class cdHistory extends AppCompatActivity {
                     String key=snp.child("id").getValue(String.class);
                     String time=snp.child("time").getValue(String.class);
                     String email=snp.child("email").getValue(String.class);
+                    String remark=snp.child("remark").getValue(String.class);
 
-                    UserTime ut= new UserTime(name,email,time,key);
+                    UserTime ut= new UserTime(name,email,time,key,remark);
                     userlist.add(ut);
                 }
                 ArrayList<UserTime> revut=new ArrayList<>();

@@ -5,12 +5,22 @@ public class UserTime {
     private String email;
     private String time;
     private String id;
+    private String remark;
 
-    public UserTime(String name, String email, String time, String id) {
+    public UserTime(String name, String email, String time, String id, String remark) {
         this.name = name;
         this.email = email;
         this.time = time;
         this.id = id;
+        this.remark=remark;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public String getName() {
