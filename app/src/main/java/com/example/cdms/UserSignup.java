@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Scanner;
+
 public class UserSignup extends AppCompatActivity {
     EditText mFullName,mEmail,mPassword,mConfirmPassword ;
     Button mSignup;
@@ -91,7 +93,7 @@ public class UserSignup extends AppCompatActivity {
                         if(task.isSuccessful()){
                             insertdata(name,email,password,task.getResult().getUser().getUid());
                             Toast.makeText(UserSignup.this,"Signup Successful",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), scannerView.class));
                         }
                         else{
                             Toast.makeText(UserSignup.this,"Error!" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
