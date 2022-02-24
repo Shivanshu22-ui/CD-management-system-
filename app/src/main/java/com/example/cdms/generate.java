@@ -4,13 +4,16 @@ import static android.graphics.Color.BLACK;
 import static android.graphics.Color.WHITE;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.DatePickerDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -27,9 +30,11 @@ import com.google.zxing.common.BitMatrix;
 
 import java.lang.reflect.Array;
 import java.security.Key;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class generate extends AppCompatActivity {
+public class generate extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private ImageView qrimg;
     private EditText name;
@@ -40,6 +45,9 @@ public class generate extends AppCompatActivity {
     private Spinner spinner;
     private String BranchCode;
     private String Date="12/02/2022";
+    private Button datePickerButton;
+    private TextView dateView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +57,9 @@ public class generate extends AppCompatActivity {
         txt= findViewById(R.id.text1);
         btn=findViewById(R.id.btn);
         spinner=findViewById(R.id.spinner);
+        datePickerButton=findViewById(R.id.datePickerButton);
+        dateView=findViewById(R.id.dateView);
+        Date=getCurrentDate();
 
         ArrayAdapter<String> adapter=new ArrayAdapter<>(generate.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,branchlist);
         spinner.setAdapter(adapter);
@@ -84,6 +95,22 @@ public class generate extends AppCompatActivity {
                 }
             }
         });
+
+        datePickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datepicker= new datePickerFragment();
+                datepicker.show(getSupportFragmentManager(),"date picker");
+            }
+        });
+    }
+
+    private String getCurrentDate() {
+        Calendar cal=Calendar.getInstance();
+        int year=cal.get(Calendar.YEAR);
+        int month=cal.get(Calendar.MONTH)+1;
+        int day=cal.get(Calendar.DAY_OF_MONTH);
+        return DateFormat.getDateInstance().format(cal.getTime());
     }
 
     Bitmap createBitmap(String str) throws WriterException {
@@ -119,5 +146,16 @@ public class generate extends AppCompatActivity {
     public void onATGclicked(View view) {
         fund="ATG";
         Log.d("luls",fund);
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar cal=Calendar.getInstance();
+        cal.set(Calendar.YEAR,year);
+        cal.set(Calendar.MONTH,month);
+        cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+        String date= DateFormat.getDateInstance().format(cal.getTime());
+        dateView.setText(date);
     }
 }

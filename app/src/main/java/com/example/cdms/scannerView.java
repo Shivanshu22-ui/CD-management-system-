@@ -98,7 +98,7 @@ DatabaseReference dbCD;
                             updateuser(code);
 
                             String gotname=snapshot.child(code).child("name").getValue(String.class);
-                            String gotBranchCode=snapshot.child(code).child("BranchCode").getValue(String.class);
+                            String gotBranchCode=snapshot.child(code).child("branchCode").getValue(String.class);
                             Intent intent= new Intent(scannerView.this,UserCDInfo.class);
                             intent.putExtra("name",gotname);
                             intent.putExtra("branchcode",gotBranchCode);
@@ -107,12 +107,12 @@ DatabaseReference dbCD;
                             startActivity(intent);
                         }
                         else{
-                            Toast.makeText(scannerView.this,"something went wrong",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(scannerView.this,"invalid QR code",Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(scannerView.this,"something wnt wrong",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(scannerView.this,"Something went wrong",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
