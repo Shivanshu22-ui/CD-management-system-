@@ -54,7 +54,7 @@ public class cdLayout extends BaseAdapter {
 
 
         cdName.setText((CharSequence) mData.get(position).getName());
-        cdDescription.setText((CharSequence) mData.get(position).getSummary());
+        cdDescription.setText((CharSequence) mData.get(position).getBranchCode());
 
 
         return myView;

@@ -9,9 +9,11 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,24 +25,33 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+import java.lang.reflect.Array;
 import java.security.Key;
+import java.util.ArrayList;
 
 public class generate extends AppCompatActivity {
 
     private ImageView qrimg;
     private EditText name;
-    private EditText summary;
     private TextView txt;
     private Button btn;
+    private String fund="ITH";
+    private final String[] branchlist ={"A", "G", "Q", "C", "DC", "E", "CP"};
+    private Spinner spinner;
+    private String BranchCode;
+    private String Date="12/02/2022";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate);
         qrimg= findViewById(R.id.qrgen);
         name= findViewById(R.id.name);
-        summary= findViewById(R.id.summary);
         txt= findViewById(R.id.text1);
         btn=findViewById(R.id.btn);
+        spinner=findViewById(R.id.spinner);
+
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(generate.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,branchlist);
+        spinner.setAdapter(adapter);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("cd");
@@ -55,11 +66,11 @@ public class generate extends AppCompatActivity {
                     String text=name.getText().toString();
                     try {
                         String Name=name.getText().toString();
-                        String Summary=summary.getText().toString();
                         String key=myRef.push().getKey();
                         String id=key;
                         String user=null;
-                        cd cd =new cd(Name,Summary,id,user);
+                        BranchCode= (String) spinner.getSelectedItem();
+                        cd cd =new cd(Name,id,user,Date,fund,BranchCode);
 
                         myRef.child(key).setValue(cd);
 
@@ -98,5 +109,15 @@ public class generate extends AppCompatActivity {
         Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         bitmap.setPixels(pixels, 0, 500, 0, 0, w, h);
         return bitmap;
+    }
+
+    public void onITHclicked(View view) {
+        fund="ITH";
+        Log.d("luls",fund);
+    }
+
+    public void onATGclicked(View view) {
+        fund="ATG";
+        Log.d("luls",fund);
     }
 }

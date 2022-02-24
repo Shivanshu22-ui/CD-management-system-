@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/white"
     android:layout_height="match_parent">
@@ -7,31 +8,31 @@
     <ImageView
         android:id="@+id/qrgen"
         android:layout_width="236dp"
-        android:layout_height="234dp"
+        android:layout_height="236dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/qr"
         android:backgroundTint="#27399E" />
+
     <TextView
+        android:id="@+id/text1"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_below="@+id/qrgen"
-        android:id="@+id/text1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:hint="Enter the name of CD"
-        android:textSize="15sp"
         android:text="Your qr code will be generated here "
-        />
+        android:textAlignment="center"
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/name"
         android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/text1"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/spinner"
+        android:layout_centerHorizontal="true"
         android:background="#D9DADF"
         android:hint="Enter name of CD"
         android:textAlignment="center"
@@ -43,23 +44,68 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_below="@+id/name"
-        android:textColorHint="#474545"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="#D9DADF"
         android:hint="Summary"
         android:textAlignment="center"
+        android:textColorHint="#474545"
         android:textSize="20sp" />
 
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Type of fund : "
+            android:textColor="@color/black"
+             />
+        <RadioButton
+            android:id="@+id/ith"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onITHclicked"
+            android:text="ITH"
+            android:checked="true"
+            android:textColor="@color/black"
+            />
+
+        <RadioButton
+            android:textColor="@color/black"
+            android:id="@+id/atg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onATGclicked"
+            android:text="ATG"
+            />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radio"
+        android:background="@color/cardview_dark_background"
+        android:layout_centerHorizontal="true"
+        />
     <Button
         android:id="@+id/btn"
         android:layout_width="289dp"
         android:layout_height="65dp"
         android:layout_below="@+id/summary"
-        android:textColor="@color/white"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="57dp"
         android:backgroundTint="#27399E"
-        android:text="GENERATE QR CODE" />
+        android:text="GENERATE QR CODE"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

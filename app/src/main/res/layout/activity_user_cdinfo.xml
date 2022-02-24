@@ -85,7 +85,7 @@
         android:id="@+id/textView6"
         android:layout_width="289dp"
         android:layout_height="43dp"
-        android:text="CD Summary :"
+        android:text="CD Branch Code :"
         android:textAlignment="textStart"
         android:textColor="#121111"
         android:textSize="20sp"
