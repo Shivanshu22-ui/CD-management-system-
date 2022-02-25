@@ -38,7 +38,6 @@ ArrayList<UserTime> userlist;
 cdLayout CdLayout;
 cd cd;
 ProgressBar pg_bar;
-EditText inputSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +52,7 @@ EditText inputSearch;
         list = new ArrayList<>();
         idlist = new ArrayList<>();
         adapter = new ArrayAdapter<String>(this,R.layout.activity_cd_info, R.id.borrowerInfo,list);
-        inputSearch = (EditText) findViewById(R.id.inputSearch);
         pg_bar=findViewById(R.id.pg_bar);
-        inputSearch = (EditText) findViewById(R.id.inputSearch);
 
         pg_bar.setVisibility(View.VISIBLE);
         ref.addValueEventListener(new ValueEventListener() {
@@ -110,27 +107,6 @@ EditText inputSearch;
                         Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-        });
-
-        inputSearch.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-                // listOfcds.this.adapter.getFilter().filter(cs);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                // TODO Auto-generated method stub
             }
         });
     }

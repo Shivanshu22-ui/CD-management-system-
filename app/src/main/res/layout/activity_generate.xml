@@ -34,9 +34,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="#D9DADF"
-        android:hint="Enter name of CD"
-        android:textColor="@color/black"
+        android:hint="Enter CD number"
+        android:inputType="number"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textColorHint="#474545"
         android:textSize="20sp" />
 

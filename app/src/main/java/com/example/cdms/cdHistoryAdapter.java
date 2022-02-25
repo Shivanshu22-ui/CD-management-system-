@@ -35,7 +35,7 @@ public class cdHistoryAdapter extends ArrayAdapter<UserTime> {
         TextView remark=convertView.findViewById(R.id.li_remark);
         String timedate=userArrayList.get(position).getTime();
 
-        name.setText(userArrayList.get(position).getName());
+        name.setText(Html.fromHtml("<b>CD number : </b>"+userArrayList.get(position).getName()));;
         key.setText(Html.fromHtml("<b>id : </b>"+userArrayList.get(position).getuserId()));
         email.setText(userArrayList.get(position).getEmail());
         time.setText(Html.fromHtml("<b>Scanned on: </b>"+timedate.substring(0,10)+"&nbsp;&nbsp;&nbsp;"+timedate.substring(11,19)));

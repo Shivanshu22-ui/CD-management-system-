@@ -32,7 +32,6 @@
         android:inputType="textPersonName"
         android:hint="Enter Your Name"
         android:textColorHint="#6C6868"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +53,6 @@
 
     <EditText
         android:id="@+id/email"
-        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -70,7 +68,6 @@
 
     <EditText
         android:id="@+id/password"
-        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -86,7 +83,6 @@
 
     <EditText
         android:id="@+id/confirmPassword"
-        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
