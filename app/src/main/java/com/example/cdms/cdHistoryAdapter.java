@@ -18,7 +18,6 @@ public class cdHistoryAdapter extends ArrayAdapter<UserTime> {
     private Context context;
     public cdHistoryAdapter(@NonNull Context context, ArrayList<UserTime> userArrayList) {
         super(context,0,userArrayList);
-
         this.userArrayList=userArrayList;
         this.context=context;
     }
@@ -33,12 +32,14 @@ public class cdHistoryAdapter extends ArrayAdapter<UserTime> {
         TextView key=convertView.findViewById(R.id.li_key);
         TextView email=convertView.findViewById(R.id.li_email);
         TextView time=convertView.findViewById(R.id.li_time);
+        TextView remark=convertView.findViewById(R.id.li_remark);
         String timedate=userArrayList.get(position).getTime();
 
         name.setText(userArrayList.get(position).getName());
-        key.setText(Html.fromHtml("<b>Key : </b>"+userArrayList.get(position).getId()));
+        key.setText(Html.fromHtml("<b>id : </b>"+userArrayList.get(position).getuserId()));
         email.setText(userArrayList.get(position).getEmail());
-        time.setText(Html.fromHtml("<b>Scanned on: </b>"+timedate.substring(0,10)+"&nbsp;&nbsp;&nbsp;"+timedate.substring(12,19)));
+        time.setText(Html.fromHtml("<b>Scanned on: </b>"+timedate.substring(0,10)+"&nbsp;&nbsp;&nbsp;"+timedate.substring(11,19)));
+        remark.setText(Html.fromHtml("<b>REMARK : </b>"+userArrayList.get(position).getRemark()));
 
         return convertView;
     }

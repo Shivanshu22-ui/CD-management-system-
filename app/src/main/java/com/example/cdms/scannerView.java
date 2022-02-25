@@ -128,13 +128,19 @@ DatabaseReference dbCD;
 
         DatabaseReference ref=FirebaseDatabase.getInstance().getReference("cd/"+code+"/borrower");
         String userKey=fAuth.getCurrentUser().getUid();
+
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference("users/"+userKey);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user=snapshot.getValue(User.class);
-                UserTime ut=new UserTime(user.getName(),user.getEmail(),dtf.format(now),user.getKey(),remark.getText().toString());
-                ref.child(ut.getTime()).setValue(ut);
+                if (snapshot.exists()) {
+                    User user = snapshot.getValue(User.class);
+                    UserTime ut = new UserTime(user.getName(), user.getEmail(), dtf.format(now), user.getUserid(), remark.getText().toString());
+                    ref.child(ut.getTime()).setValue(ut);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"something went wrong",Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

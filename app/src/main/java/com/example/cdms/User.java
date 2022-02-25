@@ -6,16 +6,26 @@ public class User {
     private String password;
     private String key;
     private boolean admin;
+    private String userid;
 
     public User(){
 
     }
-    public User(String name, String email, String password,String key ,boolean admin) {
+    public User(String name, String email, String password,String key ,boolean admin,String userid) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.key=key;
         this.admin=admin;
+        this.userid=userid;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public boolean isAdmin() {

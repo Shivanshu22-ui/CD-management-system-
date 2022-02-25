@@ -4,14 +4,14 @@ public class UserTime {
     private String name;
     private String email;
     private String time;
-    private String id;
     private String remark;
+    private String userid;
 
-    public UserTime(String name, String email, String time, String id, String remark) {
+    public UserTime(String name, String email, String time, String userid, String remark) {
         this.name = name;
         this.email = email;
         this.time = time;
-        this.id = id;
+        this.userid = userid;
         this.remark=remark;
     }
 
@@ -47,11 +47,11 @@ public class UserTime {
         this.time = time;
     }
 
-    public String getId() {
-        return id;
+    public String getuserId() {
+        return userid;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.userid = userid;
     }
 }

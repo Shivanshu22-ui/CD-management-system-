@@ -27,6 +27,7 @@ public class UserSignup extends AppCompatActivity {
     TextView mLoginBtn;
     FirebaseAuth fAuth;
     ProgressBar progressBar;
+    EditText muserid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class UserSignup extends AppCompatActivity {
         mSignup = findViewById(R.id.signUp);
         mLoginBtn = findViewById(R.id.loginBtn);
         progressBar = findViewById(R.id.progressBar);
+        muserid=findViewById(R.id.userid);
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -55,6 +57,7 @@ public class UserSignup extends AppCompatActivity {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
                 String confirmPassword = mConfirmPassword.getText().toString().trim();
+                String userid=muserid.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)){
                     mEmail.setError("Email is required");
@@ -89,7 +92,7 @@ public class UserSignup extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            insertdata(name,email,password,task.getResult().getUser().getUid());
+                            insertdata(name,email,password,task.getResult().getUser().getUid(),userid);
                             Toast.makeText(UserSignup.this,"Signup Successful",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }
@@ -110,8 +113,8 @@ public class UserSignup extends AppCompatActivity {
         });
     }
 
-    private void insertdata(String name, String email, String password, String key) {
-        User user=new User(name,email,password,key,false);
+    private void insertdata(String name, String email, String password, String key,String userid) {
+        User user=new User(name,email,password,key,true,userid);
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference("users");
         ref.child(key).setValue(user);
     }

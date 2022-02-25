@@ -73,7 +73,7 @@ EditText inputSearch;
                 }
                 CdLayout = new cdLayout(getApplicationContext(),cdList);
                 listView.setAdapter(CdLayout);
-
+                pg_bar.setVisibility(View.GONE);
             }
 
             @Override
@@ -81,7 +81,6 @@ EditText inputSearch;
 
             }
         });
-        pg_bar.setVisibility(View.GONE);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -98,7 +97,7 @@ EditText inputSearch;
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for(DataSnapshot snp:snapshot.getChildren()){
                             String name=snp.child("name").getValue(String.class);
-                            String key=snp.child("id").getValue(String.class);
+                            String key=snp.child("userid").getValue(String.class);
                             String time=snp.child("time").getValue(String.class);
                             String email=snp.child("email").getValue(String.class);
                             String remark= snp.child("remark").getValue(String.class);

@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Html;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +26,12 @@ public class cdHistory extends AppCompatActivity {
     private ListView listview;
     private cdHistoryAdapter adapter;
     private ArrayList<UserTime> userlist;
+    private TextView cdname;
+    private TextView cdfund;
+    private TextView branchcode;
+    private TextView date;
+    private TextView curruser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,15 +39,37 @@ public class cdHistory extends AppCompatActivity {
 
         id=getIntent().getExtras().getString("id");
         listview= findViewById(R.id.listview2);
-        userlist=new ArrayList<>();
+        cdname= findViewById(R.id.list_name);
+        cdfund=findViewById(R.id.list_fund);
+        branchcode=findViewById(R.id.list_branchcode);
+        date=findViewById(R.id.list_date);
+        curruser=findViewById(R.id.list_currentuser);
 
+        userlist=new ArrayList<>();
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("cd/"+id);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                cd cd=snapshot.getValue(cd.class);
+                cdname.setText(Html.fromHtml("<b>CD no : </b>"+cd.getName()));
+                cdfund.setText(Html.fromHtml("<b>Fund type : </b>"+cd.getFund()));
+                branchcode.setText(Html.fromHtml("<b>Branch Code : </b>"+cd.getBranchCode()));
+                date.setText(Html.fromHtml("<b>Date : </b>"+cd.getDate()));
+                curruser.setText(Html.fromHtml("<b>Current User : </b>"+cd.getUser()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference("cd/"+ id+"/borrower");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snp:snapshot.getChildren()){
                     String name=snp.child("name").getValue(String.class);
-                    String key=snp.child("id").getValue(String.class);
+                    String key=snp.child("userId").getValue(String.class);
                     String time=snp.child("time").getValue(String.class);
                     String email=snp.child("email").getValue(String.class);
                     String remark=snp.child("remark").getValue(String.class);
