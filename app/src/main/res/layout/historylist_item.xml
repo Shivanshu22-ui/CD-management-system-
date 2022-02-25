@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@color/browser_actions_bg_grey"
+    android:backgroundTint="@color/white"
     android:layout_height="match_parent">
 
     <TextView
@@ -9,6 +10,7 @@
         android:layout_marginStart="10sp"
         android:id="@+id/li_name"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,12 +21,14 @@
         android:layout_below="@+id/li_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         />
     <TextView
         android:layout_marginStart="10dp"
         android:id="@+id/li_key"
         android:layout_below="@+id/li_email"
         android:layout_width="match_parent"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         />
 
@@ -37,6 +41,7 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:id="@+id/li_remark"
         android:layout_marginStart="10dp"
