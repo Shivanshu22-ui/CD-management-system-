@@ -116,7 +116,7 @@ public class UserSignup extends AppCompatActivity {
     }
 
     private void insertdata(String name, String email, String password, String key,String userid) {
-        User user=new User(name,email,password,key,true,userid);
+        User user=new User(name,email,password,key,false,userid);
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference("users");
         ref.child(key).setValue(user);
     }

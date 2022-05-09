@@ -74,14 +74,11 @@ public class generate extends AppCompatActivity implements DatePickerDialog.OnDa
                     Toast.makeText(generate.this,"Name must not be empty",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    String text=name.getText().toString();
                     try {
                         String Name=name.getText().toString();
                         String key=myRef.push().getKey();
-                        String id=key;
-                        String user=null;
                         BranchCode= (String) spinner.getSelectedItem();
-                        cd cd =new cd(Name,id,user,Date,fund,BranchCode);
+                        cd cd =new cd(Name,key,null,Date,fund,BranchCode);
 
                         myRef.child(key).setValue(cd);
 
@@ -89,8 +86,10 @@ public class generate extends AppCompatActivity implements DatePickerDialog.OnDa
                         qrimg.setImageBitmap(qrcode);
                         txt.setText("Here is the QR code");
                         Toast.makeText(generate.this,"Data inserted",Toast.LENGTH_SHORT).show();
+
                     } catch (WriterException e) {
                         e.printStackTrace();
+                        Toast.makeText(generate.this,"something went wrong",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
